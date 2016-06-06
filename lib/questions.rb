@@ -217,10 +217,9 @@ end
 def titleize_a_string(string)
   string.capitalize!
     words_no_cap = ["and", "or", "the", "over", "to", "the", "a", "but"]
-    phrase = string.split(" ").map {|word|
+    string.split(" ").map {|word|
       words_no_cap.include?(word) ? word : word.capitalize
     }.join(" ")
-  phrase
 end
 
 # return true if a string contains any special characters
