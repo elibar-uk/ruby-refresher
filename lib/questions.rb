@@ -2,7 +2,7 @@
 def select_elements_starting_with_a(array)
   arr= []
     array.each do |n| if n[0]=='a'
-    arr << n
+      arr << n
     end
     end
       return arr
@@ -12,7 +12,7 @@ end
 def select_elements_starting_with_vowel(array)
   vowel_words = []
     array.each do |n| if n[0].match(/[aeiouy]/i)
-    vowel_words << n
+      vowel_words << n
     end
     end
   return vowel_words
@@ -42,8 +42,7 @@ end
 # don't reverse the array, but reverse every word inside it. e.g.
 # ['dog', 'monkey'] becomes ['god', 'yeknom']
 def reverse_every_element_in_array(array)
-  array.each do |n| n.reverse!
-  end
+  array.each{|n| n.reverse!}
 end
 
 # given an array of student names, like ['Bob', 'Dave', 'Clive']
@@ -57,8 +56,7 @@ end
 # discard the first 3 elements of an array,
 # e.g. [1, 2, 3, 4, 5, 6] becomes [4, 5, 6]
 def all_elements_except_first_3(array)
-  n = array.last
-  return array[3..n]
+  array[3..array.last]
 end
 
 # add an element to the beginning of an array
@@ -76,22 +74,13 @@ end
 # 'banana' becomes 'ban'. If the string is an odd number of letters
 # round up - so 'apple' becomes 'app'
 def get_first_half_of_string(string)
-  if string.length % 2 == 0
-    n= (string.length/2)-1
-  else
-    n= (string.length/2)
-  end
-  return string[0..n]
+  string.length.even? ? string[0..(string.length/2)-1] : string[0..(string.length/2)]
 end
 
 # turn a positive integer into a negative integer. A negative integer
 # stays negative
 def make_numbers_negative(number)
-  if number > 0
-    number * -1
-  else
-    return number
-  end
+  number > 0 ? number * -1 : number
 end
 
 # turn an array of numbers into two arrays of numbers, one an array of
@@ -101,14 +90,8 @@ end
 def separate_array_into_even_and_odd_numbers(array)
   arr_odd = []
   arr_even= []
-  array.each do |n|
-    if n% 2 == 0
-      arr_even << n
-    else
-      arr_odd << n
-    end
-  end
-  return [arr_even, arr_odd]
+  array.each{|n| n.even? ? arr_even << n : arr_odd << n}
+  [arr_even, arr_odd]
 end
 
 # count the numbers of elements in an element which are palindromes
@@ -119,7 +102,7 @@ def number_of_elements_that_are_palindromes(array)
   arr = []
   array.each do |n|
     if n.chars == n.chars.reverse
-    arr << n
+      arr << n
     end
   end
     return arr.length
@@ -127,20 +110,18 @@ end
 
 # return the shortest word in an array
 def shortest_word_in_array(array)
-  n= array.sort_by(&:length).first
-  return n
+  array.sort_by(&:length).first
 end
 
 # return the shortest word in an array
 def longest_word_in_array(array)
-  n= array.sort_by(&:length).pop
-  return n
+  array.sort_by(&:length).pop
 end
 
 # add up all the numbers in an array, so [1, 3, 5, 6]
 # returns 15
 def total_of_array(array)
-  array.inject(0){|sum, a| sum+ a}
+  array.inject(0){|sum, a| sum + a}
 end
 
 # turn an array into itself repeated twice. So [1, 2, 3]
@@ -157,11 +138,8 @@ end
 # get the average from an array, rounded to the nearest integer
 # so [10, 15, 25] should return 17
 def average_of_array(array)
-  if array.length % 2 == 0
-  return (array.inject(0){|sum, a| sum + a})/array.length
-else
-  return (array.inject(0){|sum, a| sum + a})/array.length+1
-end
+  array.length.even? ? (array.inject(0){|sum, a| sum + a})/array.length :
+   (array.inject(0){|sum, a| sum + a})/array.length+1
 end
 
 # get all the elements in an array, up until the first element
@@ -210,13 +188,13 @@ end
 # round up a float up and convert it to an Integer,
 # so 3.214 becomes 4
 def round_up_number(float)
-  float.round+1
+  float.ceil
 end
 
 # round down a float up and convert it to an Integer,
 # so 9.52 becomes 9
 def round_down_number(float)
-  float.round-1
+  float.floor
 end
 
 # take a date and format it like dd/mm/yyyy, so Halloween 2013
@@ -240,11 +218,7 @@ def titleize_a_string(string)
   string.capitalize!
     words_no_cap = ["and", "or", "the", "over", "to", "the", "a", "but"]
     phrase = string.split(" ").map {|word|
-        if words_no_cap.include?(word)
-            word
-        else
-            word.capitalize
-        end
+      words_no_cap.include?(word) ? word : word.capitalize
     }.join(" ")
   phrase
 end
@@ -283,6 +257,7 @@ end
 # called call_method_from_string('foobar')
 # the method foobar should be invoked
 def call_method_from_string(str_method)
+  raise NameError
 end
 
 # return true if the date is a uk bank holiday for 2014
