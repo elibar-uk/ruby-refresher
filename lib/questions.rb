@@ -198,13 +198,13 @@ end
 # add all the keys and all the values together, e.g.
 # {1 => 1, 2 => 2} becomes 6
 def add_together_keys_and_values(hash)
-  hash.values.inject{ |a, b| a + b } + hash.keys.inject{ |a, b| a + b }
+  hash.inject(:+).inject(:+)
 end
 
 # take out all the capital letters from a string
 # so 'Hello JohnDoe' becomes 'ello ohnoe'
 def remove_capital_letters_from_string(string)
-  # string.gsub(/(?<!\S)[A-Z]+(?!\S)/)[0]
+  string.split(//).delete_if{|i| i.match(/^[A-Z]+$/)}.join("")
 end
 
 # round up a float up and convert it to an Integer,
@@ -222,7 +222,7 @@ end
 # take a date and format it like dd/mm/yyyy, so Halloween 2013
 # becomes 31/10/2013
 def format_date_nicely(date)
-  # Time.zone.parse(date)
+  date.strftime('%d/%m/%Y')
 end
 
 # get the domain name *without* the .com part, from an email address
@@ -265,6 +265,8 @@ end
 # should return true for a 3 dot range like 1...20, false for a
 # normal 2 dot range
 def is_a_3_dot_range?(range)
+  return false if range.size == range.last
+  true
 end
 
 # get the square root of a number
